@@ -10,7 +10,6 @@ const App = () => {
   const [createTrigger, setCreateTrigger] = useState(false)
   const [updateTrigger, setUpdateTrigger] = useState(false)
   const [deleteTrigger, setDeleteTrigger] = useState(false)
-  const [move, setMove] = useState(false)
 
   const label = ['Task 1', 'Task 2', 'Task 3', 'Task 4']
   const type = ['primary', 'secondary', 'danger', 'success']
@@ -33,16 +32,14 @@ const App = () => {
     getTodos()
   }, [createTrigger, updateTrigger, deleteTrigger])
 
-  const moveItem = async (todoId, itemId) => {
+  const moveItem = async (itemId, todoId) => {
+    const payload = { targetTodoId: todoId }
     try {
-      const payload = { targetTodoId: todoId }
-
       const res = await moveOne(itemId, payload)
 
-      console.log(res)
-      // if (res.data.message === 'success') {
-      //   getTOdos()
-      // }
+      if (res.status === 200) {
+        getTodos()
+      }
     } catch (err) {
       console.log(err)
     }
@@ -54,7 +51,20 @@ const App = () => {
       <div className='container todo-wrapper'>
         {todos?.map((todo, i) => (
           <>
-            <Todo label={label[i]} type={type[i]} title={todo.title} setCreateTrigger={setCreateTrigger} setUpdateTrigger={setUpdateTrigger} setDeleteTrigger={setDeleteTrigger} setMove={setMove} items={todo.Items} todoId={todo.id} />
+            <Todo
+              label={label[i]}
+              type={type[i]}
+              title={todo.title}
+              setCreateTrigger={setCreateTrigger}
+              setUpdateTrigger={setUpdateTrigger}
+              setDeleteTrigger={setDeleteTrigger}
+              moveItem={moveItem}
+              todo={todos}
+              items={todo.Items}
+              todoId={todo.id}
+              todoLength={todos.length}
+              index={i}
+            />
           </>
         ))}
 

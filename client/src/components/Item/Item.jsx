@@ -10,7 +10,7 @@ const Progress = ({ done }) => {
   )
 }
 
-const Dropdown = ({ setUpdateTrigger, setDeleteTrigger, setMove, itemId }) => {
+const Dropdown = ({ setUpdateTrigger, setDeleteTrigger, moveItem, itemId, todo, todoLength, index }) => {
   const [isActive, setIsActive] = useState(false)
 
   return (
@@ -19,15 +19,19 @@ const Dropdown = ({ setUpdateTrigger, setDeleteTrigger, setMove, itemId }) => {
       {isActive && (
         <>
           <div className='dropdown-content'>
-            <div className='dropdown-item right'>
-              <Right style={{ marginRight: '1rem' }} />
-              Move Right
-            </div>
+            {todoLength - 1 !== index && (
+              <div className='dropdown-item right' onClick={() => moveItem(itemId, todo[index + 1].id)}>
+                <Right style={{ marginRight: '1rem' }} />
+                Move Right
+              </div>
+            )}
 
-            <div className='dropdown-item left' onClick={() => setMove(itemId)}>
-              <Left style={{ marginRight: '1rem' }} />
-              Move Left
-            </div>
+            {index !== 0 && (
+              <div className='dropdown-item left' onClick={() => moveItem(itemId, todo[index - 1].id)}>
+                <Left style={{ marginRight: '1rem' }} />
+                Move Left
+              </div>
+            )}
 
             <div className='dropdown-item edit' onClick={() => setUpdateTrigger(itemId)}>
               <Edit style={{ marginRight: '1rem' }} />
@@ -53,7 +57,7 @@ export const EmptyItem = () => {
   )
 }
 
-export const Item = ({ title, percent, trigger, setUpdateTrigger, setDeleteTrigger, setMove, itemId }) => {
+export const Item = ({ title, percent, trigger, setUpdateTrigger, setDeleteTrigger, moveItem, itemId, todoLength, index, todo }) => {
   return (
     <>
       <div className='title'>
@@ -73,7 +77,7 @@ export const Item = ({ title, percent, trigger, setUpdateTrigger, setDeleteTrigg
           )}
         </div>
 
-        <Dropdown trigger={trigger} setUpdateTrigger={setUpdateTrigger} setDeleteTrigger={setDeleteTrigger} setMove={setMove} itemId={itemId} />
+        <Dropdown trigger={trigger} setUpdateTrigger={setUpdateTrigger} setDeleteTrigger={setDeleteTrigger} moveItem={moveItem} itemId={itemId} todoLength={todoLength} index={index} todo={todo} />
       </div>
     </>
   )
