@@ -13,6 +13,7 @@ const Form = ({ data, setData }) => {
         </label>
         <input type='text' id='name' name='task-name' placeholder='Type your task' onChange={handleChange} />
       </div>
+
       <div className='form-item'>
         <label for='progress'>
           <h3>Progress</h3>

@@ -23,9 +23,9 @@ export const Label = ({ label, type }) => {
   )
 }
 
-export const NewTask = ({ setTrigger }) => {
+export const NewTask = ({ setTrigger, todoId }) => {
   return (
-    <div className='new-task' style={{ cursor: 'pointer', marginTop: '2px' }} onClick={() => setTrigger(true)}>
+    <div className='new-task' style={{ cursor: 'pointer', marginTop: '2px' }} onClick={() => setTrigger(todoId)}>
       <PlusCircle style={{ width: '1rem', marginRight: '5px' }} />
       <h3 className='thin'>New Task</h3>
     </div>

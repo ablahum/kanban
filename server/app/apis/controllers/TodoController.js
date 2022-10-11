@@ -1,7 +1,7 @@
 const { Todo, Item } = require('../../db/models')
 
 module.exports = {
-  showAll: async (req, res, next) => {
+  getAll: async (req, res, next) => {
     try {
       // const todos = await Todo.findAll()
       const todos = await Todo.findAll({
@@ -15,7 +15,7 @@ module.exports = {
       next(err)
     }
   },
-  addOne: async (req, res, next) => {
+  createOne: async (req, res, next) => {
     const { title } = req.body
 
     try {

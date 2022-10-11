@@ -1,8 +1,9 @@
 import { useState } from 'react'
+
 import { ReactComponent as Close } from '../../assets/close.svg'
 import { Button } from '../Buttons'
 import Form from '../Form'
-import { addItem } from '../../apis/items'
+import { createOne } from '../../apis/items'
 
 const Create = ({ trigger, setTrigger, todoId }) => {
   const [data, setData] = useState({
@@ -12,11 +13,12 @@ const Create = ({ trigger, setTrigger, todoId }) => {
 
   const handleSubmit = async () => {
     try {
-      // const res = await addItem(todoId, { data })
-      console.log(todoId)
-      // console.log(res)
-      // window.location.reload()
+      const res = await createOne(todoId, data)
+
+      alert(res.data.msg)
+      setTrigger(false)
     } catch (err) {
+      alert(err.response.data.msg)
       console.log(err)
     }
   }

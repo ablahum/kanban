@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { updateItem } from '../../apis/items'
+
+import { updateOne } from '../../apis/items'
 import { ReactComponent as Close } from '../../assets/close.svg'
 import { Button } from '../Buttons'
 import Form from '../Form'
@@ -12,12 +13,12 @@ const Update = ({ trigger, setTrigger, itemId }) => {
 
   const handleSubmit = async () => {
     try {
-      // const res = await updateItem(itemId, { data })
-      console.log(itemId)
-      // console.log(res)
-      // window.location.reload()
+      const res = await updateOne(itemId, data)
+
+      alert(res.data.msg)
+      setTrigger(false)
     } catch (err) {
-      console.log(err)
+      alert(err.response.data.msg)
     }
   }
 

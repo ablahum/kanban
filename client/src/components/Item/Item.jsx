@@ -1,4 +1,5 @@
 import { useState } from 'react'
+
 import { More, Right, Left, Edit, Delete, Checklist } from '../../assets'
 
 const Progress = ({ done }) => {
@@ -9,7 +10,7 @@ const Progress = ({ done }) => {
   )
 }
 
-const Dropdown = ({ setUpdateTrigger, setDeleteTrigger }) => {
+const Dropdown = ({ setUpdateTrigger, setDeleteTrigger, setMove, itemId }) => {
   const [isActive, setIsActive] = useState(false)
 
   return (
@@ -22,15 +23,18 @@ const Dropdown = ({ setUpdateTrigger, setDeleteTrigger }) => {
               <Right style={{ marginRight: '1rem' }} />
               Move Right
             </div>
-            <div className='dropdown-item left'>
+
+            <div className='dropdown-item left' onClick={() => setMove(itemId)}>
               <Left style={{ marginRight: '1rem' }} />
               Move Left
             </div>
-            <div className='dropdown-item edit' onClick={() => setUpdateTrigger(true)}>
+
+            <div className='dropdown-item edit' onClick={() => setUpdateTrigger(itemId)}>
               <Edit style={{ marginRight: '1rem' }} />
               Edit
             </div>
-            <div className='dropdown-item trash' onClick={() => setDeleteTrigger(true)}>
+
+            <div className='dropdown-item trash' onClick={() => setDeleteTrigger(itemId)}>
               <Delete style={{ marginRight: '1rem' }} />
               Delete
             </div>
@@ -49,7 +53,7 @@ export const EmptyItem = () => {
   )
 }
 
-export const Item = ({ title, percent, trigger, setUpdateTrigger, setDeleteTrigger }) => {
+export const Item = ({ title, percent, trigger, setUpdateTrigger, setDeleteTrigger, setMove, itemId }) => {
   return (
     <>
       <div className='title'>
@@ -69,7 +73,7 @@ export const Item = ({ title, percent, trigger, setUpdateTrigger, setDeleteTrigg
           )}
         </div>
 
-        <Dropdown trigger={trigger} setUpdateTrigger={setUpdateTrigger} setDeleteTrigger={setDeleteTrigger} />
+        <Dropdown trigger={trigger} setUpdateTrigger={setUpdateTrigger} setDeleteTrigger={setDeleteTrigger} setMove={setMove} itemId={itemId} />
       </div>
     </>
   )

@@ -1,10 +1,11 @@
 const express = require('express')
-const { showAll, showOne, addOne, updateOne, deleteOne } = require('../controllers/ItemController')
 const { body, param, validationResult } = require('express-validator')
+
+const { getAll, getOne, createOne, updateOne, deleteOne, move } = require('../controllers/ItemController')
 
 const router = express.Router()
 
-router.get('/items', showAll)
+router.get('/items', getAll)
 
 router.get(
   '/:TodoId',
@@ -15,7 +16,7 @@ router.get(
 
     next()
   },
-  showOne
+  getOne
 )
 
 router.post(
@@ -29,7 +30,7 @@ router.post(
 
     next()
   },
-  addOne
+  createOne
 )
 
 router.patch(
@@ -57,6 +58,47 @@ router.delete(
     next()
   },
   deleteOne
+)
+
+router.put(
+  '/:id/move',
+  // param('id')
+  //   .notEmpty()
+  //   .withMessage('param id is required')
+  //   .bail()
+  //   .isNumeric()
+  //   .withMessage('id must be an integer')
+  //   .bail()
+  //   .custom(async (value, { req }) => {
+  //     const checking = await Item.findOne({ where: { id: value } })
+  //     if (checking === null) {
+  //       return Promise.reject()
+  //     }
+  //   })
+  //   .withMessage('param id not found'),
+  // body('targetTodoId')
+  //   .notEmpty()
+  //   .withMessage('name is required')
+  //   .bail()
+  //   .custom(async (value, { req }) => {
+  //     const checking = await Todo.findOne({ where: { id: value } })
+  //     if (checking === null) {
+  //       return Promise.reject()
+  //     }
+  //   })
+  //   .withMessage('targetTodoId not found'),
+  // (req, res, next) => {
+  //   const error = validationResult(req)
+  //   if (!error.isEmpty()) {
+  //     return res.status(422).json({
+  //       message: 'error',
+  //       error: error.array(),
+  //     })
+  //   }
+
+  //   next()
+  // },
+  move
 )
 
 module.exports = router

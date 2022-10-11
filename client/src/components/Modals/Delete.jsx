@@ -1,15 +1,15 @@
 import { Button } from '../Buttons'
 import { ReactComponent as Exclamation } from '../../assets/danger.svg'
 import { ReactComponent as Close } from '../../assets/close.svg'
-import { removeItem } from '../../apis/items'
+import { deleteOne } from '../../apis/items'
 
 const Delete = ({ trigger, setTrigger, itemId }) => {
   const handleDelete = async () => {
     try {
-      const res = await removeItem(itemId)
+      const res = await deleteOne(itemId)
 
-      console.log(res)
-      // window.location.reload()
+      alert(res.data.msg)
+      setTrigger(false)
     } catch (err) {
       console.log(err)
       console.log(err)

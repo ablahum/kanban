@@ -1,9 +1,3 @@
-// import express, { json, urlencoded } from 'express'
-// import cookieParser from 'cookie-parser'
-// import logger from 'morgan'
-// import dotenv from 'dotenv'
-// import cors from 'cors'
-
 const express = require('express')
 const cookieParser = require('cookie-parser')
 const logger = require('morgan')
@@ -25,7 +19,9 @@ app.use(cookieParser())
 app.use(cors())
 
 app.use(`${URL}/todos`, todos)
-app.use(`${URL}`, items)
+app.use(`${URL}/item`, items)
+
+app.listen(process.env.PORT || 4000)
 
 app.use((req, res, next) => {
   const err = new Error('Not Found')
@@ -38,7 +34,5 @@ app.use((err, req, res, next) => {
   res.locals.error = req.app.get('env') === 'development' ? err : {}
   res.status(err.status || 500).json({ message: err.message })
 })
-
-app.listen(process.env.PORT || 4000)
 
 module.exports = app

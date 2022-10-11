@@ -1,9 +1,9 @@
 const express = require('express')
-const { showAll, addOne } = require('../controllers/TodoController')
+const { getAll, createOne } = require('../controllers/TodoController')
 
 const router = express.Router()
 
-router.get('/', showAll)
-router.post('/', addOne)
+router.get('/', getAll)
+router.post('/', createOne)
 
 module.exports = router
