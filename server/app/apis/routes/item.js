@@ -1,7 +1,7 @@
 const express = require('express')
 const { body, param, validationResult } = require('express-validator')
 
-const { getAll, getOne, createOne, updateOne, deleteOne, move } = require('../controllers/ItemController')
+const { getAll, getOne, createOne, updateOne, deleteOne, moveOne } = require('../controllers/ItemController')
 
 const router = express.Router()
 
@@ -98,7 +98,7 @@ router.put(
 
   //   next()
   // },
-  move
+  moveOne
 )
 
 module.exports = router

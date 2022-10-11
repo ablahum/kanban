@@ -118,7 +118,7 @@ module.exports = {
     }
   },
 
-  move: async (req, res) => {
+  moveOne: async (req, res) => {
     const { id } = req.params
     const { targetTodoId } = req.body
 
